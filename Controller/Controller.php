@@ -31,6 +31,6 @@ abstract class Controller
         ob_start();
         require $this->viewsPath . '/' . str_replace('.',  '/', $view) . '.php';
         $content = ob_get_clean();
-        require $this->templatesPath . $template . '.php';
+        require $this->templatesPath . '/' . $template . '.php';
     }
 }
