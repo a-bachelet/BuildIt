@@ -83,7 +83,6 @@ abstract class Router implements RouterInterface
 
     /**
      * Runs Router checking job
-     * @return mixed
      * @throws \Exception
      */
     public function dispatch()
@@ -91,9 +90,11 @@ abstract class Router implements RouterInterface
         if (!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
             throw new \Exception('UNAUTHORIZED REQUEST METHOD');
         } else {
+            $match = false;
             /** @var Route $route **/
             foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
                 if ($route->match($this->url)) {
+                    $match = true;
                     if ($route->isAdmin()) {
                         if ($this->isUserAdminCallable()) {
                             $route->call($this->adminControllersPath);
@@ -105,7 +106,9 @@ abstract class Router implements RouterInterface
                     }
                 }
             }
-            $this->notFoundCallable();
+            if ($match === false) {
+                $this->notFoundCallable();
+            }
         }
     }
 
