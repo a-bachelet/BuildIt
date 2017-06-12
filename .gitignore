@@ -1,0 +1,9 @@
+# BuildIt Git Ignore File
+
+## JetBrains IDE
+
+.idea/
+
+## Demo Folder
+
+Demo/
