@@ -140,7 +140,11 @@ abstract class Repository
         $qb->select(['*'])->from([$this->table]);
         $conditions = [];
         foreach ($props as $k => $v) {
-            $conditions[] = $k . ' = ' . $v;
+            if (is_string($v)) {
+                $conditions[] = $k . ' = ' . '\'' . $v . '\'';
+            } else {
+                $conditions[] = $k . ' = ' . $v;
+            }
         }
         $qb->where($conditions);
         $query = $qb->getQuery();
