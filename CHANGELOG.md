@@ -1,3 +1,6 @@
+## 1.0.3 (13/06/2017)
+Repository findBy() error fix
+
 ## 1.0.2 (12/06/2017)
 Router notFoundCallable() error fix
 
