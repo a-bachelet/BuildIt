@@ -1,3 +1,6 @@
+## 1.0.4  (18/06/2017)
+Field validation fix
+
 ## 1.0.3 (13/06/2017)
 Repository findBy() error fix
 
