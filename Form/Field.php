@@ -51,7 +51,7 @@ class Field
      */
     public function isValid()
     {
-        if (!$this->value) {
+        if (!isset($this->value)) {
             return false;
         } else {
             $valid = true;
