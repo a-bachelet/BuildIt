@@ -1,3 +1,6 @@
+## 1.0.5  (24/06/2017)
+Added getLastInsertedId method to Database Class
+
 ## 1.0.4  (18/06/2017)
 Field validation fix
 
