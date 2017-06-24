@@ -63,4 +63,13 @@ abstract class Database
         $result->setFetchMode(\PDO::FETCH_OBJ);
         return $fetchAll ? $result->fetchAll() : $result->fetch();
     }
+
+    /**
+     * Returns the last inserted ID in the Database.
+     * @return string
+     */
+    public function getLastInsertedId()
+    {
+        return $this->pdo->lastInsertId();
+    }
 }
