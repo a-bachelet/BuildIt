@@ -158,4 +158,42 @@ abstract class Repository
         return $entities;
     }
 
+    /**
+     * @mix findBetween & findBy
+     * @param integer | string $offset
+     * @param integer | string $limit
+     * @param string $order
+     * @param array $props
+     * @return array
+     */
+    public function findBetweenBy($offset, $limit, $order = 'ASC', $props = [])
+    {
+        $qb = new QueryBuilder();
+        $conditions = [];
+        foreach ($props as $k => $v) {
+            if (is_string($v)) {
+                $conditions[] = $k . ' = ' . '\'' . $v . '\'';
+            } else {
+                $conditions[] = $k . ' = ' . $v;
+            }
+        }
+        $query = $qb
+            ->select(['*'])
+            ->from([$this->table])
+            ->where($conditions)
+            ->orderBy('id')
+            ->order($order)
+            ->limit($limit)
+            ->offset($offset)
+            ->getQuery();
+        $result = $this->db->query($query, true);
+        $entities = [];
+        foreach ($result as $res) {
+            $entity = new $this->model();
+            $entity->fill($res);
+            $entities[] = $entity;
+        }
+        return $entities;
+    }
+
 }
